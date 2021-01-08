@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnceDev.Training.Infrastructure.Repository.SqlServer\OnceDev.Training.Infrastructure.Repository.SqlServer.csproj" />
+  </ItemGroup>
+	
+</Project>
