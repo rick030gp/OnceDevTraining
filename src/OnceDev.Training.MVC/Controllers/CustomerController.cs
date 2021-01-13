@@ -13,7 +13,7 @@ namespace OnceDev.Training.MVC.Controllers
         }
         public IActionResult Index()
         {
-            return View(_repository.List(c=> c.FirstName.StartsWith("Ma")));
+            return View(_repository.List());
         }
 
         public IActionResult Create()

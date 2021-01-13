@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnceDev.Training.Infrastructure.Repository
 {
@@ -30,9 +31,9 @@ namespace OnceDev.Training.Infrastructure.Repository
             _context.SaveChanges();            
         }
 
-        public IEnumerable<T> List()
+        public async Task<IEnumerable<T>> List()
         {
-            return _context.Set<T>().AsNoTracking();
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public IEnumerable<T> List(Func<T, bool> predicate)

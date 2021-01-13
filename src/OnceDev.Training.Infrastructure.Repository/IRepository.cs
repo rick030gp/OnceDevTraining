@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnceDev.Training.Infrastructure.Repository
 {
@@ -9,7 +10,7 @@ namespace OnceDev.Training.Infrastructure.Repository
         bool Update(T entity);
         bool Delete(T entity);
         T Find(Func<T, bool> predicate);
-        IEnumerable<T> List();
+        Task<IEnumerable<T>> List();
         IEnumerable<T> List(Func<T, bool> predicate);
     }
 }
