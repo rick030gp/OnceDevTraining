@@ -1,16 +1,11 @@
 ﻿using MediatR;
 using OnceDev.Training.Infrastructure.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace OnceDev.Training.Application.Customer.Queries
 {
-    //Clase de comando
     public class GetCustomersQuery : IRequest<IEnumerable<Domain.Customer>>
     {
     }
