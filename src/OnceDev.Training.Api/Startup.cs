@@ -26,7 +26,9 @@ namespace OnceDev.Training.Api
             );
             
             services.AddDbContext<NorthwindDbContext>(opt => 
-            opt.UseSqlServer(Configuration.GetConnectionString("northwind")));
+                opt.UseSqlServer(Configuration.GetConnectionString("northwind"),
+                options=> options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            );
 
             services.AddMediatR(typeof(GetCustomersHandler).Assembly);
 

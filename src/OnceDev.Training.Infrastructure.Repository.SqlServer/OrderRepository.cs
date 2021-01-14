@@ -13,7 +13,9 @@ namespace OnceDev.Training.Infrastructure.Repository
         }
         public async Task <IEnumerable<Order>> ListWithOrderItemsAsync()
         {
-            return await _context.Orders.Include(o => o.OrderItems).ToListAsync();
+            return await _context.Orders                        
+                        .Include(o => o.OrderItems)                     
+                        .ToListAsync();
         }
     }
 }
