@@ -20,15 +20,20 @@ namespace OnceDev.Training.Infrastructure.Repository
             return _context.SaveChanges() > 0;
         }
 
-        public T Find(Func<T, bool> predicate)
+        public async Task<T> FindById(int id)
         {
-            return _context.Set<T>().AsNoTracking().FirstOrDefault(predicate);
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public void Insert(T entity)
+        public T Find(Func<T, bool> predicate)
         {
-            _context.Add(entity);
-            _context.SaveChanges();            
+            return _context.Set<T>().FirstOrDefault(predicate);         
+        }
+
+        public async Task InsertAsync(T entity)
+        {
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> List()

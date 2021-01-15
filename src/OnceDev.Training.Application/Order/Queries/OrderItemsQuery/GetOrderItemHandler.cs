@@ -8,7 +8,6 @@ namespace OnceDev.Training.Application.Order.Queries.OrderItemsQuery
 {
     public class GetOrderItemQuery: IRequest<IEnumerable<Domain.Order>>
     {
-
     }
     public class GetOrderItemHandler : IRequestHandler<GetOrderItemQuery, IEnumerable<Domain.Order>>
     {
