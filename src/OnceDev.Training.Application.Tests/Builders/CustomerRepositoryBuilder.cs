@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using GenFu;
+using Moq;
 using OnceDev.Training.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,16 @@ namespace OnceDev.Training.Application.Tests.Builders
             return this;
         }
 
+        public CustomerRepositoryBuilder With10Customers()
+        {
+            _repository.Setup(c => c.List()).ReturnsAsync(GetCustomers(10));
+            return this;
+        }
+
+        private List<Domain.Customer> GetCustomers(int quantity)
+        {
+            return A.ListOf<Domain.Customer>(quantity);
+        }
         public ICustomerRepository Build()
         {
             return _repository.Object;
