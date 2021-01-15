@@ -1,10 +1,7 @@
 ﻿using FluentAssertions;
 using OnceDev.Training.Application.Customer.Queries;
 using OnceDev.Training.Application.Tests.Builders;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

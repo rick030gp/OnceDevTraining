@@ -35,5 +35,7 @@ namespace OnceDev.Training.Api.Controllers
             var customerId = await _mediator.Send(postCustomer);
             return CreatedAtRoute("GetCustomer", new { Id = customerId }, postCustomer);
         }
+
+
     }
 }

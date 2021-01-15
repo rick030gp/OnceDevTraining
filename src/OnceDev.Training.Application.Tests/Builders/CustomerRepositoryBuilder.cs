@@ -1,11 +1,7 @@
 ﻿using GenFu;
 using Moq;
 using OnceDev.Training.Infrastructure.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnceDev.Training.Application.Tests.Builders
 {
