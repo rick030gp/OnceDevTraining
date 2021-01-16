@@ -1,12 +1,10 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnceDev.Training.Application.Customer.Queries;
-using OnceDev.Training.Infrastructure.Repository;
+using OnceDev.Training.Api.Middleware;
 
 namespace OnceDev.Training.Api
 {
@@ -21,19 +19,16 @@ namespace OnceDev.Training.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            services
+                .AddControllers()
+                .AddValidators()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             
-            services.AddDbContext<NorthwindDbContext>(opt => 
-                opt.UseSqlServer(Configuration.GetConnectionString("northwind"),
-                options=> options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
-            );
-
-            services.AddMediatR(typeof(GetCustomersHandler).Assembly);
-
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<IOrderRepository, OrderRepository>();
+            services                
+                .AddApplication()
+                .AddInfrastructure(Configuration.GetConnectionString("northwind"));
         }
                 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,13 +37,11 @@ namespace OnceDev.Training.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
+            app.UseCustomException()
+               .UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

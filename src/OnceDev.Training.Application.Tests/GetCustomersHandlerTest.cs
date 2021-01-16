@@ -12,9 +12,10 @@ namespace OnceDev.Training.Application.Tests
         [Fact]
         public async Task GetCustomersHandler__Handle__GetListOfCustomers()
         {
-
             var request = new GetCustomersQuery();
-            var repository = new CustomerRepositoryBuilder().With10Customers().Build();
+            var repository = new CustomerRepositoryBuilder()
+                                .With10Customers()
+                                .Build();
             var handler = new GetCustomersHandler(repository);
 
             var result = await handler.Handle(request, new System.Threading.CancellationToken());

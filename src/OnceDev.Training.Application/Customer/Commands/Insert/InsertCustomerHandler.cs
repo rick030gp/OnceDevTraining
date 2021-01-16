@@ -1,36 +1,27 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using OnceDev.Training.Infrastructure.Repository;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace OnceDev.Training.Application.Customer.Commands.Insert
 {
-    public class PostInsertCustomerCommand : IRequest<int>
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Phone { get; set; }
+    public class PostInsertCustomerCommand : Dto.Customer, IRequest<int>
+    {   
     }
     public class InsertCustomerHandler : IRequestHandler<PostInsertCustomerCommand, int>
     {
         private readonly ICustomerRepository _repository;
-        public InsertCustomerHandler(ICustomerRepository repository)
+        private readonly IMapper _mapper;
+        public InsertCustomerHandler(ICustomerRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<int> Handle(PostInsertCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = new Domain.Customer
-            {
-                City = request.City,
-                Country = request.Country,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Phone = request.Phone
-            };
+            var customer = _mapper.Map<Dto.Customer, Domain.Customer>(request);
 
             await _repository.InsertAsync(customer);
 
